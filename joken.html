@@ -1,0 +1,119 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>JOKENPO</title>
+	<script language="JavaScript">
+		var vitorias = 0;
+		var empates = 0;
+		var derrotas = 0;
+		var nome = prompt("Digite seu Nome");
+		if(nome=="Bruna" || nome=="bruna" || nome=="Bruna Gomes" || nome=="bruna gomes" || nome=="bruna Gomes" || nome=="Bruna gomes"){
+			confirm("Sorte do Dia: Olá Bruna Gomes, humana nascida em 09/12/1996, parece que os astros estão alinhados, e Arthur Gonçalves é Destino, e o Destino é inexorável.");
+		}
+		confirm("SEJA BEM VINDO " + nome.toUpperCase());
+		function inicio(){
+			document.getElementById("lblNome").innerHTML = nome + " escolha seu movimento: ";
+			escolhendo();
+		}
+		
+		function jogar(){
+			var escolhaPc = parseInt((Math.random()*3)+1);
+			var escolhaPlayer = document.getElementById("movimento").value;
+			document.getElementById("escolhaComputador").innerHTML = "Escolha do Computador:";
+
+			if(escolhaPc==1){
+				document.getElementById("imgComputador").src = "pedra.jpg";
+			}
+			else if(escolhaPc==2)
+				{
+				document.getElementById("imgComputador").src = "papel.png";
+			}
+			else if(escolhaPc==3)
+				{
+				document.getElementById("imgComputador").src = "tesoura.jpg";
+			}
+			
+			if(escolhaPc==escolhaPlayer){
+				empates+=1;
+				alert("EMPATOU!");
+			}
+			else if(escolhaPlayer == 1 && escolhaPc == 2){
+				derrotas+=1;
+				alert("O COMPUTADOR VENCEU");
+			}
+			else if(escolhaPlayer == 1 && escolhaPc == 3){
+				vitorias+=1;
+				alert(nome + " VENCEU");
+			}
+			else if(escolhaPlayer == 2  && escolhaPc == 1){
+				vitorias+=1;
+				alert(nome + " VENCEU");
+			}
+			else if(escolhaPlayer == 2 && escolhaPc == 3){
+				derrotas+=1;
+				alert("O COMPUTADOR VENCEU");
+			}
+			else if(escolhaPlayer == 3 && escolhaPc == 1){
+				derrotas+=1;
+				alert("O COMPUTADOR VENCEU");
+			}
+			else if(escolhaPlayer == 3 && escolhaPc == 2){
+				vitorias+=1;
+				alert(nome + " VENCEU");
+			}
+			atualizarPlacar();
+		}
+		function escolhendo(){
+			var opcao = document.getElementById("movimento").value;
+
+			document.getElementById("escolhaJogador").innerHTML = "Escolha do(a) " + nome + ":";
+
+			if(opcao==1){
+				document.getElementById("imgJogador").src = "pedra.jpg";
+			}
+			else if(opcao==2)
+				{
+				document.getElementById("imgJogador").src = "papel.png";
+			}
+			else if(opcao==3)
+				{
+				document.getElementById("imgJogador").src = "tesoura.jpg";
+			}
+		}
+		function atualizarPlacar(){
+			document.getElementById("lblVitorias").innerHTML = "Vitorias: " + vitorias;
+			document.getElementById("lblDerrotas").innerHTML = "Derrotas: " + derrotas;
+			document.getElementById("lblEmpates").innerHTML = "Empates: " + empates;
+		}
+		function resetar(){
+			vitorias=0;
+			derrotas=0;
+			empates=0;
+			document.getElementById("imgJogador").src = "inter.jpg";
+			document.getElementById("imgComputador").src = "inter.jpg";
+			atualizarPlacar();
+		}
+	</script>
+</head>
+<body onload="inicio()">
+	<span id="lblNome"></span>
+	<select id="movimento" onChange="escolhendo()">
+		<option value="1" selected>Pedra</option>
+		<option value="2">Papel</option>
+		<option value="3">Tesoura</option>
+	</select><br>
+	<input type="Button" name="btnJogar" value="Jogar" onClick="jogar()"><br><br>
+
+	<span id="escolhaJogador"></span><br>
+	<img  height="250px" width="250px" id="imgJogador"><br><br><br>
+
+	<span id="escolhaComputador"></span><br>
+	<img  height="250px" width="250px" id="imgComputador">
+	<br><br>
+	<h1>PLACAR:</h1>
+	<span id="lblVitorias"></span><br>
+	<span id="lblDerrotas"></span><br>
+	<span id="lblEmpates"></span><br>
+	<input type="Button" name="btnResetar" value="Resetar Jogo" onClick="resetar()">
+</body>
+</html>
